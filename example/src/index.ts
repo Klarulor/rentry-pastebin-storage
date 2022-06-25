@@ -1,7 +1,7 @@
 //import {createPastebin, PastebinClient} from "pastebin-storage";
 
-import {createPaste, PastebinStorage} from "../../dist";
 import {RentryClient} from "rentry-pastebin";
+import {createPaste, PastebinStorage} from "../../dist";
 
 
 (async () => {
