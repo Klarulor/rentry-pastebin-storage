@@ -1,0 +1,25 @@
+{
+  "name": "rentry-pastebin-storage",
+  "version": "1.2.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "/dist"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "klarulor",
+  "repository": {
+    "url": "https://github.com/Klarulor/rentry-pastebin-storage"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "rentry-pastebin": "^1.2.0",
+    "typescript": "^4.7.4"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0"
+  }
+}
