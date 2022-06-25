@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createPaste = void 0;
+const Cryptr = require('cryptr');
 const defaultBody = {
     name: "nothing",
     description: "nothing",
@@ -23,9 +24,12 @@ function modifyBody(options) {
     body.content = (_a = options.content) !== null && _a !== void 0 ? _a : {};
     return body;
 }
-function createPaste(client, options) {
+function createPaste(client, options, encoding = { encode: false }) {
     return new Promise((res, rej) => __awaiter(this, void 0, void 0, function* () {
         let body = options ? modifyBody(options) : defaultBody;
+        if (encoding.encode) {
+            body = (new Cryptr(encoding.key)).encrypt(body);
+        }
         //let code = await client.createPaste({publicity: isPrivate ? Publicity.Private : Publicity.Public, code: JSON.stringify(body, null, "\t")});
         const data = yield client.createPaste({ content: JSON.stringify(body, null, "\t") });
         res(data);

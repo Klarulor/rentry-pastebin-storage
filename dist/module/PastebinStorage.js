@@ -11,13 +11,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PastebinStorage = void 0;
 const rentry_pastebin_1 = require("rentry-pastebin");
+const Cryptr = require('cryptr');
 class PastebinStorage {
     constructor(client) {
         this.getPasteId = () => this.id;
         this.client = client || new rentry_pastebin_1.RentryClient();
     }
-    usePaste(paste) {
+    usePaste(paste, encoding = { encode: false }) {
         return __awaiter(this, void 0, void 0, function* () {
+            this.encoding = encoding;
             const obj = paste;
             if (obj.link && obj.editCode) {
                 const createStruct = paste;
@@ -43,7 +45,9 @@ class PastebinStorage {
     }
     getField(key = "__main") {
         return new Promise((done) => __awaiter(this, void 0, void 0, function* () {
-            const data = yield this.client.getPaste(this.id);
+            let data = yield this.client.getPaste(this.id);
+            if (this.encoding.encode)
+                data = (new Cryptr(this.encoding.key)).decrypt(data);
             let json = JSON.parse(data);
             if (key != "__main")
                 done(json.content[key]);
@@ -53,13 +57,17 @@ class PastebinStorage {
     }
     updateField(key = "__main", value) {
         return new Promise((done) => __awaiter(this, void 0, void 0, function* () {
-            const data = yield this.client.getPaste(this.id);
+            let data = yield this.client.getPaste(this.id);
+            if (this.encoding.encode)
+                data = (new Cryptr(this.encoding.key)).decrypt(data);
             let json = JSON.parse(data);
             if (key != "__main")
                 json.content[key] = value;
             else
                 json.content = value;
-            yield this.paste.setContentAsync(JSON.stringify(json, null, "\t"));
+            const stringJson = JSON.stringify(json, null, "\t");
+            const newContent = this.encoding.encode ? (new Cryptr(this.encoding.key)).encrypt(stringJson) : stringJson;
+            yield this.paste.setContentAsync(newContent);
             done();
         }));
     }

@@ -18,4 +18,5 @@ __exportStar(require("./module/PastebinStorage"), exports);
 __exportStar(require("./module/functions"), exports);
 __exportStar(require("./module/features/IPasteCreateStruct"), exports);
 __exportStar(require("./module/features/IPasteOptions"), exports);
+__exportStar(require("./module/features/IEncodingPasteStruct"), exports);
 //# sourceMappingURL=index.js.map

@@ -1,6 +1,6 @@
 {
   "name": "rentry-pastebin-storage",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -16,6 +16,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "cryptr": "^6.0.3",
     "rentry-pastebin": "^1.2.0",
     "typescript": "^4.7.4"
   },
