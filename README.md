@@ -8,7 +8,7 @@ $ npm install rentry-pastebin-storage
 ## Examples
 ```
 $ git clone git://github.com/klarulor/rentry-pastebin-storage/ --depth 1
-$ cd exmaple
+$ cd example
 $ npm install
 ```
 
